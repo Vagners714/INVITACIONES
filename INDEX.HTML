@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invitación de Boda</title>
+    <style>
+      :root {
+        --bg: #eff3e2;
+        --panel: #f9faf2;
+        --text: #2f3929;
+        --muted: #5e665a;
+        --accent: #a7b86b;
+        --accent-dark: #6f7d3d;
+        --soft: #dfe7bf;
+        --gold: #c9d98c;
+        --success: #4b6b3d;
+        --shadow: rgba(52, 61, 34, 0.14);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background:
+          radial-gradient(circle at top, rgba(255,255,255,0.7), transparent 30%),
+          linear-gradient(180deg, #f5f7ee 0%, #edf1e1 45%, #e5ead6 100%);
+        color: var(--text);
+      }
+
+      .page {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 32px 18px 50px;
+        position: relative;
+      }
+
+      .hero {
+        position: relative;
+        background: linear-gradient(180deg, rgba(255,255,255,0.82), rgba(248,250,242,0.54));
+        border: 1px solid rgba(111,125,61,0.18);
+        border-radius: 28px;
+        box-shadow: 0 14px 35px var(--shadow);
+        padding: 32px 18px 26px;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .hero::before,
+      .hero::after {
+        content: "❀ ❀ ❀";
+        position: absolute;
+        top: 18px;
+        font-size: 1.3rem;
+        color: rgba(111,125,61,0.42);
+        letter-spacing: 0.7rem;
+      }
+
+      .hero::before {
+        left: 24px;
+      }
+
+      .hero::after {
+        right: 24px;
+      }
+
+      .badge {
+        display: inline-block;
+        background: #e6ecc5;
+        color: var(--accent-dark);
+        font-size: 12px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        padding: 10px 18px;
+        border-radius: 999px;
+        font-weight: 700;
+        box-shadow: 0 6px 14px rgba(111,125,61,0.12);
+      }
+
+      .top-actions {
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      h1 {
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: clamp(2.1rem, 5vw, 4rem);
+        margin: 18px 0 10px;
+        letter-spacing: 0.06em;
+        color: #2d3625;
+      }
+
+      .names {
+        font-size: clamp(1.3rem, 3vw, 2.1rem);
+        color: var(--accent-dark);
+        font-family: Georgia, 'Times New Roman', serif;
+        letter-spacing: 0.08em;
+        margin-bottom: 10px;
+      }
+
+      .date {
+        font-size: 1rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .content {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 22px;
+        margin-top: 28px;
+      }
+
+      .card {
+        background: var(--panel);
+        border: 1px solid rgba(168,116,101,0.12);
+        border-radius: 22px;
+        box-shadow: 0 8px 24px rgba(98,74,67,0.08);
+        padding: 24px;
+      }
+
+      .card h2 {
+        margin-top: 0;
+        font-size: 1.55rem;
+        color: var(--text);
+        font-family: Georgia, 'Times New Roman', serif;
+      }
+
+      .text {
+        line-height: 1.8;
+        color: var(--text);
+        font-size: 1.02rem;
+      }
+
+      .location-box {
+        margin-top: 18px;
+        padding: 18px;
+        border-radius: 18px;
+        background: #edf3d8;
+        border: 1px solid rgba(111,125,61,0.2);
+      }
+
+      .location-box strong {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .location-btn {
+        display: inline-block;
+        margin-top: 12px;
+        padding: 12px 18px;
+        border-radius: 999px;
+        background: var(--accent-dark);
+        color: white;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .rsvp-form {
+        display: grid;
+        gap: 14px;
+      }
+
+      label {
+        display: grid;
+        gap: 8px;
+        font-size: 0.96rem;
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      input, select, textarea, button {
+        font: inherit;
+      }
+
+      input, select, textarea {
+        width: 100%;
+        border: 1px solid rgba(127, 91, 80, 0.2);
+        border-radius: 12px;
+        padding: 12px 14px;
+        background: #fff;
+        color: var(--text);
+      }
+
+      textarea {
+        min-height: 100px;
+        resize: vertical;
+      }
+
+      .button-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 8px;
+      }
+
+      .top-actions a {
+        text-decoration: none;
+      }
+
+      .btn {
+        border: none;
+        border-radius: 999px;
+        padding: 13px 20px;
+        cursor: pointer;
+        font-weight: 700;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+      }
+
+      .btn:hover { transform: translateY(-1px); }
+
+      .btn-primary {
+        background: var(--accent-dark);
+        color: #fff;
+      }
+
+      .btn-secondary {
+        background: #dfe7bf;
+        color: #2f3929;
+      }
+
+      .btn-admin {
+        background: #e5ead0;
+        color: var(--text);
+      }
+
+      .success {
+        margin-top: 16px;
+        padding: 12px 14px;
+        border-radius: 12px;
+        background: rgba(95,141,105,0.12);
+        color: var(--success);
+        font-weight: 700;
+        display: none;
+      }
+
+      .admin-box {
+        display: none;
+        margin-top: 28px;
+      }
+
+      .admin-box.visible {
+        display: block;
+      }
+
+      .admin-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 12px;
+        font-size: 0.92rem;
+      }
+
+      .admin-table th, .admin-table td {
+        border: 1px solid rgba(123, 89, 81, 0.18);
+        padding: 10px 8px;
+        text-align: left;
+      }
+
+      .admin-table th {
+        background: #f7eae6;
+      }
+
+      .empty-state {
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      @media (max-width: 760px) {
+        .content {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div class="badge">Te invitamos</div>
+        <h1>Nos casamos</h1>
+        <div class="names">Vagner &amp; Paola</div>
+        <div class="date">17 de octubre del 2026</div>
+        <div class="button-row top-actions">
+          <a class="btn btn-primary" id="whatsappShareBtn" href="#" target="_blank" rel="noreferrer">Enviar por WhatsApp</a>
+        </div>
+      </header>
+
+      <main class="content">
+        <section class="card">
+          <h2>¡Celebramos juntos este día tan especial!</h2>
+          <div class="text">
+            Con mucho cariño te invitamos a compartir con nosotros una noche llena de amor, emoción y alegría.
+            Tu presencia hará que este momento sea aún más inolvidable.
+            <br /><br />
+            Esperamos contar contigo para celebrar nuestra nueva etapa.
+          </div>
+
+          <div class="location-box">
+            <strong>Ubicación del salón</strong>
+            13 Avenida 1-78 Z.1 Salón Los Arcos<br />
+            Guatemala<br />
+            <a class="location-btn" href="https://www.google.com/maps/search/?api=1&query=14.646468081418853,-90.50315831646165" target="_blank" rel="noreferrer">
+              Ver ubicación en Google Maps
+            </a>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Confirmación de asistencia</h2>
+          <form class="rsvp-form" id="rsvpForm">
+            <label>
+              Nombre completo
+              <input type="text" id="nombre" placeholder="Tu nombre" required />
+            </label>
+
+            <label>
+              ¿Asistirás?
+              <select id="confirmacion" required>
+                <option value="">Selecciona</option>
+                <option value="Asistiré">Sí, asistiré</option>
+                <option value="No asistiré">No podré asistir</option>
+              </select>
+            </label>
+
+            <label>
+              Número de personas
+              <input type="number" id="personas" min="1" max="10" value="1" required />
+            </label>
+
+            <label>
+              Mensaje o comentario
+              <textarea id="mensaje" placeholder="Escribe un mensaje para nosotros..."></textarea>
+            </label>
+
+            <div class="button-row">
+              <button class="btn btn-primary" type="submit">Confirmar asistencia</button>
+              <button class="btn btn-admin" type="button" id="adminBtn">Ver lista privada</button>
+            </div>
+          </form>
+
+          <div class="success" id="successMessage">¡Gracias! Tu confirmación fue registrada.</div>
+        </section>
+      </main>
+
+      <section class="card admin-box" id="adminBox">
+        <h2>Lista privada de confirmaciones</h2>
+        <p>Solo la puede ver quien tenga acceso administrativo.</p>
+        <div class="button-row">
+          <button class="btn btn-secondary" type="button" id="downloadBtn">Descargar Excel</button>
+        </div>
+
+        <table class="admin-table" id="adminTable">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Confirmación</th>
+              <th>Personas</th>
+              <th>Comentario</th>
+            </tr>
+          </thead>
+          <tbody id="adminTableBody"></tbody>
+        </table>
+      </section>
+    </div>
+
+    <script>
+      const STORAGE_KEY = 'confirmacionesBoda';
+      const ADMIN_PASSWORD = 'boda2026';
+
+      const rsvpForm = document.getElementById('rsvpForm');
+      const successMessage = document.getElementById('successMessage');
+      const adminBox = document.getElementById('adminBox');
+      const adminBtn = document.getElementById('adminBtn');
+      const downloadBtn = document.getElementById('downloadBtn');
+      const adminTableBody = document.getElementById('adminTableBody');
+
+      function loadConfirmations() {
+        const data = localStorage.getItem(STORAGE_KEY);
+        return data ? JSON.parse(data) : [];
+      }
+
+      function saveConfirmations(list) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+      }
+
+      function renderTable() {
+        const list = loadConfirmations();
+
+        if (!list.length) {
+          adminTableBody.innerHTML = `
+            <tr>
+              <td colspan="4" class="empty-state">Todavía no hay confirmaciones.</td>
+            </tr>
+          `;
+          return;
+        }
+
+        adminTableBody.innerHTML = list
+          .map(
+            (item) => `
+              <tr>
+                <td>${escapeHtml(item.nombre)}</td>
+                <td>${escapeHtml(item.confirmacion)}</td>
+                <td>${escapeHtml(item.personas)}</td>
+                <td>${escapeHtml(item.mensaje || '---')}</td>
+              </tr>
+            `
+          )
+          .join('');
+      }
+
+      function escapeHtml(value) {
+        return String(value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      rsvpForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const nombre = document.getElementById('nombre').value.trim();
+        const confirmacion = document.getElementById('confirmacion').value;
+        const personas = document.getElementById('personas').value;
+        const mensaje = document.getElementById('mensaje').value.trim();
+
+        if (!nombre || !confirmacion) {
+          return;
+        }
+
+        const list = loadConfirmations();
+        list.push({
+          nombre,
+          confirmacion,
+          personas,
+          mensaje,
+          fecha: new Date().toISOString()
+        });
+
+        saveConfirmations(list);
+        renderTable();
+
+        successMessage.style.display = 'block';
+        rsvpForm.reset();
+        document.getElementById('personas').value = '1';
+        setTimeout(() => {
+          successMessage.style.display = 'none';
+        }, 3000);
+      });
+
+      adminBtn.addEventListener('click', function () {
+        const password = window.prompt('Ingresa la contraseña de administración');
+
+        if (password === ADMIN_PASSWORD) {
+          adminBox.classList.add('visible');
+          renderTable();
+        } else if (password !== null) {
+          alert('Contraseña incorrecta.');
+        }
+      });
+
+      downloadBtn.addEventListener('click', function () {
+        const rows = loadConfirmations();
+
+        const headers = ['Nombre', 'Confirmación', 'Personas', 'Comentario', 'Fecha'];
+        const csvRows = [headers.join(',')];
+
+        rows.forEach((row) => {
+          const values = [
+            row.nombre,
+            row.confirmacion,
+            row.personas,
+            row.mensaje || '',
+            row.fecha || ''
+          ].map((value) => `"${String(value).replace(/"/g, '""')}"`);
+          csvRows.push(values.join(','));
+        });
+
+        const csvContent = csvRows.join('\n');
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'confirmaciones_boda.csv';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+
+        alert('Se descargó la hoja de Excel/CSV con las confirmaciones.');
+      });
+
+      const whatsappShareBtn = document.getElementById('whatsappShareBtn');
+      const whatsappText = encodeURIComponent(
+        'Te invitamos a celebrar nuestra boda.\n\nVagner y Paola\n17 de octubre del 2026\n\nUbicación: 13 Avenida 1-78 Z.1 Salón Los Arcos\nGoogle Maps: https://www.google.com/maps/search/?api=1&query=14.646468081418853,-90.50315831646165\n\n¡Esperamos verte!'
+      );
+      whatsappShareBtn.href = `https://wa.me/?text=${whatsappText}`;
+
+      renderTable();
+    </script>
+  </body>
+</html>
